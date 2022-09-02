@@ -1,0 +1,7 @@
+//.gitignore
+django1/
+django1/learning_log/python/
+__pycache__
+*.sqlite3
+.ipynb_checkpoints
+learning_log/settings.py

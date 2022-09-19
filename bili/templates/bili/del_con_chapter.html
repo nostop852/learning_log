@@ -1,0 +1,25 @@
+{% extends "learning_logs/base.html" %}
+
+
+{% block content %}
+<div class="card mb-3">
+      <h6 class="card-header">      
+        警告：其下的所有的章节和练习题都会被删除
+      </h6>
+      <div class="card-body">
+        <form action="{% url 'bili:del_chapter' chapter.id %}" method="post"> 
+            {% csrf_token %}
+            <select class="form-control" name="yes_or_no">
+                <option value="no">No</option>
+                <option value="yes">Yes</option>
+            </select>
+            <div style="float:right;margin-top:15px">
+            <button style="margin-right:20px" name="submit" class="btn btn-secondary">确认</button>
+            <div>
+        </form>
+     </div>
+</div>
+    
+    
+    
+{% endblock content %}

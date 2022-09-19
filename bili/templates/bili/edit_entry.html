@@ -1,0 +1,13 @@
+{% extends "learning_logs/base.html" %}
+
+{% block content %}
+<p><a href="{% url 'bili:chapter' chapter.id %}">{{ chapter }}</a></p>
+<p>小章节名称:</p>
+
+<form action="{% url 'bili:edit_entry' entry.id %}" method='post'>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button name="submit" class="btn btn-secondary">确认修改</button>
+</form>
+
+{% endblock content %}

@@ -1,0 +1,15 @@
+{% extends "learning_logs/base.html" %}
+
+{% block content %}
+<div style="padding:20px 20px 20px 40px">
+<div>
+<b>Exercise title：{{ exercise.topic }}</b>
+</div>
+<pre>
+<code>
+{{ exercise.text }}
+</code>
+</pre>
+</div>
+<hr>
+{% endblock content %}

@@ -26,7 +26,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('learning_logs.urls')),
     path('', include('users.urls')),
+    path('polls/', include('polls.urls')),
+    path('bili/', include('bili.urls')),
     re_path(r"^static/(?P<path>.*)$",static.serve,{'document_root':settings.STATIC_ROOT},name='static'),
 ]
 
 #urlpatterns += staticfiles_urlpatterns()
+

@@ -1,0 +1,13 @@
+{% extends "learning_logs/base.html" %}
+
+{% block content %}
+<p>添加一门新的课程</p>
+
+    <form action="{% url 'bili:new_chapter' %}" method='post'>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button  name="submit">提交</button>
+    </form>
+
+
+{% endblock content %}

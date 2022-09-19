@@ -1,0 +1,18 @@
+{% extends "learning_logs/base.html" %}
+
+{% block content %}
+<p>{{ entry }}</p>
+<p>编辑文件:</p>
+
+<form action="{% url 'bili:edit_exercise' exercise.id %}" method='post'>
+    <div class="form-group">
+        
+        {% csrf_token %}
+        {{ form.as_p }}
+        
+    </div>
+    <button name="submit" class="btn btn-secondary">确认修改</button>
+</form>
+
+{% endblock content %}
+

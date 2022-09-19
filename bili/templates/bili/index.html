@@ -1,0 +1,22 @@
+{% extends "learning_logs/base.html" %}
+
+
+{% block page_header %}
+  <div class="jumbotron">
+    <h1 class="display-3">Web开发学习</h1>
+      
+    <p class="lead">在bilibili网站发现有一个比较好的web学习UP主，叫银角大王-武沛齐，他的《最新Python的web开发全家桶（django+前端+数据库）》看了几集，觉得非常不错，准备跟学部分内容，特设计这个网站并在这里记录相关练习和资料，如果感兴趣，注册起来一起学习吧.<span style="font-size:20px">
+&#128512; &#128516; &#128525; &#128151;
+</span></p>
+      
+    <a class="btn btn-lg btn-primary" href="{% url 'users:register' %}"
+       role="button">Register &raquo;</a>
+    <a style="float:right" class="btn btn-lg btn-primary" role="button" href="{% url 'bili:chapters' %}">开始学习吧</a>
+  </div>
+
+{% endblock page_header %}
+
+{% block content %}
+<p></p>
+
+{% endblock content %}

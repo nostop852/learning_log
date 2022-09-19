@@ -1,0 +1,32 @@
+ {% extends "learning_logs/base.html" %}
+
+{% block page_header %}
+   <h2>课程学习</h2>
+{% endblock page_header %}
+
+
+{% block content %}
+
+<p>课程列表</p>
+
+
+<ul>
+  {% for chapter in chapters %}
+   <li style="margin-top:15px"><h6>
+     <span><a href="{% url 'bili:chapter' chapter.id %}">{{ chapter }}</a></span>
+     <span style="float:right;"><small><a style="color:FireBrick" href="{% url 'bili:del_chapter' chapter.id  %}">删除</a></small></span>
+     <span style="float:right">|</span>
+     <span style="float:right;margin-right:10px"><a href="{% url 'bili:edit_chapter' chapter.id %}">编辑</a></span>
+   </h6></li>
+  {% empty %}
+   <li><h3>NO chapters have been added yet.</h3></li>
+    {% endfor %}
+  </ul>
+
+    <hr>
+
+  <h4><a href="{% url 'bili:new_chapter' %}">新增一门课程</a></h4>
+
+{% endblock content %}
+
+

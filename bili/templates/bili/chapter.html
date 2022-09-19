@@ -1,0 +1,51 @@
+{% extends "learning_logs/base.html" %}
+
+
+{% block page_header %}
+<div>
+   <span style="font-size:25px"><b>{{chapter}}</b></span><span style="float:right;margin-right:15px"><a  href="{% url 'bili:chapters' %}">课程列表</a></span>
+   
+</div>
+{% endblock page_header %}
+
+{% block content %}
+<p><a href="{% url 'bili:new_entry' chapter.id %}">新增一章</a></p>
+
+
+{% for entry in entries %}
+       
+    <div class="card mb-3">
+      <h6 class="card-header">开始于{{ entry.date_added|date:'M d,Y H:i' }}      
+        <span style="float:right"><small><a style="color:FireBrick" href="{% url 'bili:del_entry' entry.id %}">删除此章节</a></small></span>
+      </h6>
+      <div class="card-body">
+          
+        <h5>{{ entry.text|linebreaks }}</h5>                 
+          {% for exer in exercises %}
+              {% if  entry.id == exer.entry_id %}
+              <div>
+              <span><b>练习题{{exer.id}}：</b></span> 
+              <span>{{ exer }}</span>
+              <span style="margin-left:20px"><a href="{% url 'bili:exercise' exer.id %}">原文</a></span>
+              <span><a href="{% url 'bili:exercise_html' exer.id %}">渲染</a></span>
+              <span style="float:right"><small><a style="color:FireBrick" href="{% url 'bili:del_exercise' exer.id %}">删除</a></small></span>
+              <span style="float:right">|</span>
+              <span style="float:right;margin-right:10px"><a href="{% url 'bili:edit_exercise' exer.id %}">编辑</a></span>
+              </div>
+              {% endif %}
+          {% endfor %}
+          
+            <hr>
+            <p style="margin-bottom:0px">
+                <span><a href="{% url 'bili:new_exercise' chapter.id entry.id %}">新开一道题</a></span>
+                
+                <span style="float:right"><a href="{% url 'bili:edit_entry' entry.id %}">修改章节标题</a></span>
+            </p>
+        
+      </div>
+    </div>
+
+{% empty %}
+    <li>There are no entries for this chapter yet.</li>
+{% endfor %}
+{% endblock content %}

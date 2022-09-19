@@ -1,0 +1,119 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,
+    shrink-to-fit=no">
+    
+<!--    <link rel="stylesheet" type="text/css" href="{% static 'polls/css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'polls/plugins/bootstrap-3.4.1/css/bootstrap.css' %}"> 
+    <script crossorigin="anonymous" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script crossorigin="anonymous" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+-->
+    
+    
+    <title>Title</title>
+    <style>
+        body{
+            margin:0px;
+        }
+        .head{
+            height:38px;
+            background-color: #333;
+            
+        }
+        .container{
+            width: 800px;
+            margin: 0px auto; 
+        }
+        .head .menu{
+            float: left;
+            color: white;
+
+        }
+        .head .account{
+            float: right;
+            color: white;
+
+        }
+        .head a{
+            color: #b8b8b8;
+            display: inline-block;
+            font-size: 13px;
+            margin-right: 5px;
+            line-height: 40px;
+        }
+    </style>
+    
+    
+    
+    
+    
+    
+   
+</head>
+<!--<body style="background-image: url('{% static 'polls/img/img12.jpg' %}')">
+<body style="background-color: LightPink">-->
+    
+<body>
+<div>
+<a style="font-size: 20px" href="{% url 'learning_logs:index' %}">
+        返回主页</a>   
+</div>
+    
+{% if latest_question_list %}
+    <ul>
+    {% for question in latest_question_list %}
+        <li><a href="/polls/{{ question.id }}/">{{ question.question_text }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+
+
+
+
+    <div class="head">
+        <div class="container">
+            <div class="menu">
+                <a>小米商城</a>
+                <a>MIUI</a>
+                <a>有品</a>
+                <a>开放平台</a>
+            </div>
+            <div class="account">
+                <a>登录</a>
+                <a>注册</a>
+                <a>消息通知</a>
+            </div>
+            <div style="clear: both;"></div>
+        </div>
+        
+    </div> 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</body>
+<!--</body>-->
+
+
+
+</html>

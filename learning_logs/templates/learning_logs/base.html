@@ -16,7 +16,7 @@
 
   <nav class="navbar navbar-expand-md navbar-light bg-light mb-4 border">
 
-    <a class="navbar-brand" href="{% url 'learning_logs:index'%}">
+    <a class="navbar-brand" href="{% url 'learning_logs:index' %}">
         Learning Log</a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -28,6 +28,13 @@
         <li class="nav-item">
           <a class="nav-link" href="{% url 'learning_logs:topics'%}">
               Topics</a></li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'polls:index'%}">
+              Polls</a></li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'bili:index'%}">
+              Bili学习</a></li>
+
       </ul>
       <ul class="navbar-nav ml-auto">
         {% if user.is_authenticated %}

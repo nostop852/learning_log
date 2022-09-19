@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Chapter,Entry,Exercise
 from .forms import ChapterForm,EntryForm,ExerciseForm
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.http import Http404
 import os
 # Create your views here.
@@ -13,6 +13,7 @@ def index(request):
 @login_required
 def chapters(request):
     chapters = Chapter.objects.filter(owner_z=request.user).order_by('date_added')
+    
     context = {'chapters': chapters}
     return render(request, 'bili/chapters.html', context)
 
@@ -32,7 +33,7 @@ def new_chapter(request):
 
 @login_required
 def new_entry(request,chapter_id):
-    context = if_owner(request.user,"chapter",chapter_id)
+    context = if_owner(request,"chapter",chapter_id)
     chapter = context['chapter']
     if request.method != 'POST':
         form = EntryForm()
@@ -48,9 +49,9 @@ def new_entry(request,chapter_id):
 
 @login_required
 def edit_entry(request,entry_id):
-    if_owner(request.user,"entry",entry_id)    
-    entry = Entry.objects.get(id=entry_id)
-    chapter = entry.chapter
+    context = if_owner(request,"entry",entry_id)
+    chapter = context['chapter']
+    entry = context['entry']
     if request.method != 'POST':
         form = EntryForm(instance=entry)
     else:
@@ -73,7 +74,7 @@ def chapter(request, chapter_id):
 
 @login_required
 def edit_chapter(request,chapter_id):
-    context = if_owner(request.user,"chapter",chapter_id)
+    context = if_owner(request,"chapter",chapter_id)
     chapter = context['chapter']
     if request.method != 'POST':
         form = ChapterForm(instance=chapter)
@@ -87,7 +88,7 @@ def edit_chapter(request,chapter_id):
 
 @login_required
 def new_exercise(request,chapter_id,entry_id):
-    context = if_owner(request.user,"entry",entry_id)
+    context = if_owner(request,"entry",entry_id)
     chapter = context['chapter']
     entry = context['entry']
     if request.method != 'POST':
@@ -104,13 +105,12 @@ def new_exercise(request,chapter_id,entry_id):
 
 @login_required
 def exercise(request, exercise_id):
-    context = if_owner(request.user,"exercise",exercise_id)
-
+    context = if_owner(request,"exercise",exercise_id)
     return render(request, 'bili/exercise.html', context)
 
 @login_required
 def exercise_html(request, exercise_id):
-    context = if_owner(request.user,"exercise",exercise_id)
+    context = if_owner(request,"exercise",exercise_id)
     exercise = context['exercise']
     road1 = os.getcwd()
     road2 = 'bili/templates/bili'
@@ -118,19 +118,18 @@ def exercise_html(request, exercise_id):
         road = road1
     else:
         road = road1 + "/" + road2
-    os.chdir(road)    
+    os.chdir(road)
 
     htmlfile = open('exercise_html.html', 'w')
     htmlfile.write(exercise.text)
     htmlfile.close()
     return render(request, 'bili/exercise_html.html', context)
 
-
 @login_required
 def edit_exercise(request,exercise_id):
-    context = if_owner(request.user,"exercise",exercise_id)
-    chapter = context['chapter']
+    context = if_owner(request,"exercise",exercise_id)
     exercise = context['exercise']
+    chapter = context['chapter']
     if request.method != 'POST':
         form = ExerciseForm(instance=exercise)
     else:
@@ -143,7 +142,7 @@ def edit_exercise(request,exercise_id):
 
 @login_required
 def del_exercise(request,exercise_id):
-    context = if_owner(request.user,"exercise",exercise_id)
+    context = if_owner(request,"exercise",exercise_id)
     chapter = context['chapter']
     if request.method != 'POST':
         return render(request, 'bili/del_con_exercise.html', context)
@@ -153,8 +152,8 @@ def del_exercise(request,exercise_id):
     return redirect('bili:chapter', chapter_id=chapter.id)
 
 @login_required
-def del_chapter(request,chapter_id):
-    context = if_owner(request.user,"chapter",chapter_id)
+def del_chapter(request,chapter_id):    
+    context = if_owner(request,"chapter",chapter_id)
     chapter = context['chapter']
     if request.method != 'POST':
         return render(request, 'bili/del_con_chapter.html', context)
@@ -165,8 +164,9 @@ def del_chapter(request,chapter_id):
 
 @login_required
 def del_entry(request,entry_id):
-    context = if_owner(request.user,"entry",entry_id)
+    context = if_owner(request,"entry",entry_id)
     chapter = context['chapter']
+    
     if request.method != 'POST':
         return render(request, 'bili/del_con_entry.html', context)
     else:
@@ -175,23 +175,23 @@ def del_entry(request,entry_id):
     return redirect('bili:chapter', chapter_id=chapter.id)
 
 @login_required
-def if_owner(username,id_name,id_value):
+def if_owner(request_obj,id_name,id_value):    
     if id_name == "chapter":
         chapter = Chapter.objects.get(id=id_value)
         context = {"chapter":chapter}
     if id_name == "entry":
         entry = Entry.objects.get(id=id_value)
         chapter = entry.chapter
-        context = {"chapter":chapter,"entry":entry}        
+        context = {"chapter":chapter,"entry":entry}
     if id_name == "exercise":
         exercise = Exercise.objects.get(id=id_value)
         entry = exercise.entry
         chapter = entry.chapter
         context = {"chapter":chapter,"entry":entry,"exercise":exercise}
-    if chapter.owner_z != username:
-        raise Http404   
+    if chapter.owner_z != request_obj.user:
+        raise Http404
     return context
-    
+
 
 
 

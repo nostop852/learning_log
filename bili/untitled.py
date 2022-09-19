@@ -4,7 +4,7 @@ from .models import Chapter,Entry,Exercise
 from .forms import ChapterForm,EntryForm,ExerciseForm
 from django.contrib.auth.models import User
 from django.http import Http404
-import os,random,re
+import os
 # Create your views here.
 
 def index(request):
@@ -112,19 +112,18 @@ def exercise(request, exercise_id):
 def exercise_html(request, exercise_id):
     context = if_owner(request,"exercise",exercise_id)
     exercise = context['exercise']
-    road = os.getcwd()
-    road1 = 'bili/templates/bili'
-    if road1 not in road:
-        road = road + "/" + road1
-        os.chdir(road)
-    
-    x = random.randint(1,10000)
-    html = "exercise_html_" + str(x) + ".html"
-    bilihtml = 'bili/' + html
-    htmlfile = open(html, 'w')
+    road1 = os.getcwd()
+    road2 = 'bili/templates/bili'
+    if road2 in road1:
+        road = road1
+    else:
+        road = road1 + "/" + road2
+    os.chdir(road)
+
+    htmlfile = open('exercise_html.html', 'w')
     htmlfile.write(exercise.text)
     htmlfile.close()
-    return render(request, bilihtml, context)
+    return render(request, 'bili/exercise_html.html', context)
 
 @login_required
 def edit_exercise(request,exercise_id):

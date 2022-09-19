@@ -1,0 +1,25 @@
+<form method="post" action="{% url 'bili:goto' %}">
+      {% csrf_token %}
+      <div>
+             用户名：<input type="text"  name="user"/>
+      </div>
+
+      <div>
+             密　码：<input type="password" name="pwd"/>
+      </div>
+      <div>
+           <input type="submit" value="submit按钮">
+      </div>
+</form>
+
+
+
+<hr>
+可以用request.POST.get('user')方式在终端看到后台数据
+<strong>
+<pre><code>
+def goto(request):
+    print(request.POST.get('user'))
+    return render(request, 'bili/index.html')
+</code></pre>
+</strong>

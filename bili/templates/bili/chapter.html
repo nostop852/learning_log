@@ -3,13 +3,13 @@
 
 {% block page_header %}
 <div>
-   <span style="font-size:25px"><b>{{chapter}}</b></span><span style="float:right;margin-right:15px"><a  href="{% url 'bili:chapters' %}">课程列表</a></span>
+   <span style="font-size:25px"><b>{{chapter}}</b></span><span style="float:right;margin-right:15px;padding-top:10px"><a href="{% url 'bili:chapters' %}">课程列表</a></span>
    
 </div>
 {% endblock page_header %}
 
 {% block content %}
-<p><a href="{% url 'bili:new_entry' chapter.id %}">新增一章</a></p>
+<p style="margin-top:15px;" ><a href="{% url 'bili:new_entry' chapter.id %}">新增一章</a></p>
 
 
 {% for entry in entries %}

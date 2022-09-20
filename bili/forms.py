@@ -20,6 +20,6 @@ class ExerciseForm(forms.ModelForm):
         fields = ['topic','text']
         labels = {'topic': '习题名称','text':'习题内容'}
         widgets = {'text': forms.Textarea(attrs={'class': "form-control",
-'style': 'width: 75%','rows': 10}),
+'style': 'width: 75%','rows': '15'}),
                   'topic': forms.TextInput(attrs={'class': "form-control",
 'style': 'width: 75%'})}

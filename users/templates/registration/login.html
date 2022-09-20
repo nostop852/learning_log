@@ -2,17 +2,17 @@
 {% load bootstrap4 %}
 
 {% block page_header %}
-   <h2>Log in to your accout</h2>
+   <h2>欢迎登录</h2>
 {% endblock page_header %}
 
 {% block content %}
 
-
-<form method="post" action="{%  url 'users:login' %}" class="form">
+<br>
+<form method="post" action="{%  url 'users:login' %}" class="form m-auto" style="width:40%" >
   {% csrf_token %}
   {% bootstrap_form form %}
   {% buttons %}
-  <button name="submit" class="btn btn-primary">Log in</button>
+  <button name="submit" class="btn btn-primary">登录</button>
   {% endbuttons %}
     
   <input type="hidden" name="next"

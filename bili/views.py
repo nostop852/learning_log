@@ -116,8 +116,7 @@ def exercise_html(request, exercise_id):
     if road1 not in road:
         road = road + "/" + road1
         os.chdir(road)
-    del_files = os.listdir(road)
-    for del_file in del_files:
+    for del_file in os.listdir(road):
         if re.search(r'_\d{4}', del_file):
             os.unlink(del_file)
     x = random.randint(1000, 9999)

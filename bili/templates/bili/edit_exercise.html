@@ -1,11 +1,11 @@
 {% extends "learning_logs/base.html" %}
 
 {% block content %}
-<div style="margin-bottom:15px"><span ><b>{{ entry }}</b></span><span style="margin-left:100px">练习题：{{ exercise.id }}</span>
+<div style="margin-bottom:15px"><span ><b>{{ entry }}</b></span><span style="margin-left:100px">练习题：<span style="color:#CD00CD">{{ exercise.id }}</span></span>
 </div>
 
 <form action="{% url 'bili:edit_exercise' exercise.id %}" method='post'>
-    <div class="form-group">
+    <div class="form-group" style="color:#969696;">
         
         {% csrf_token %}
         {{ form.as_p }}

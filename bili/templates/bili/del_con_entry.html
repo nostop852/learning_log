@@ -2,9 +2,11 @@
 
 
 {% block content %}
-<div class="card mb-3">
+<br>
+<br>
+<div class="card mb-2 m-auto" style="width:60%" >
       <h6 class="card-header">      
-        警告：其下的所有练习题都会被删除
+        <span style="color:red">警告</span>：其下的所有练习题都会被删除
       </h6>
       <div class="card-body">
         <form action="{% url 'bili:del_entry' entry.id %}" method="post"> 

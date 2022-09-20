@@ -1,8 +1,8 @@
 {% extends "learning_logs/base.html" %}
 
 {% block content %}
-<p>{{ entry }}</p>
-<p>编辑文件:</p>
+<div style="margin-bottom:15px"><span ><b>{{ entry }}</b></span><span style="margin-left:100px">练习题：{{ exercise.id }}</span>
+</div>
 
 <form action="{% url 'bili:edit_exercise' exercise.id %}" method='post'>
     <div class="form-group">

@@ -19,4 +19,4 @@ class ExerciseForm(forms.ModelForm):
         model = Exercise
         fields = ['topic','text']
         labels = {'text': ''}
-        widgets = {'text': forms.Textarea(attrs={'cols': 80,'rows': 10})}
+        widgets = {'text': forms.Textarea(attrs={'cols': 100,'rows': 10})}

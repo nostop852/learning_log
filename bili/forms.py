@@ -13,6 +13,8 @@ class EntryForm(forms.ModelForm):
         model = Entry
         fields = ['text']
         labels = {'text': '章节名称'}
+        widgets = {'text': forms.TextInput(attrs={'class': "form-control",
+'style': 'width: 75%'})}
         
 class ExerciseForm(forms.ModelForm):
     class Meta:

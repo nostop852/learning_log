@@ -12,7 +12,7 @@ def index(request):
 
 @login_required
 def chapters(request):
-    chapters = Chapter.objects.filter(owner_z=request.user).order_by('date_added')   
+    chapters = Chapter.objects.filter(owner_z=request.user).order_by('date_added')
     context = {'chapters': chapters}
     return render(request, 'bili/chapters.html', context)
 
@@ -177,7 +177,7 @@ def del_entry(request, entry_id):
     return redirect('bili:chapter', chapter_id=chapter.id)
 
 @login_required
-def if_owner(request_obj,id_name,id_value):
+def if_owner(request_obj, id_name, id_value):
     if id_name == "chapter":
         chapter = Chapter.objects.get(id=id_value)
         context = {"chapter":chapter}

@@ -7,6 +7,8 @@ class ChapterForm(forms.ModelForm):
         model = Chapter
         fields = ['text']
         labels = {'text': ''}
+        widgets = {'text': forms.TextInput(attrs={'class': "form-control",
+'style': 'width: 75%'})}
 
 class EntryForm(forms.ModelForm):
     class Meta:
